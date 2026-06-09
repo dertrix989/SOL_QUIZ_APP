@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="APP_WPF/APP_WPF.csproj" Id="80920460-77e6-4b16-8089-ba08ea82f407" />
+  <Project Path="LIB_BDD_JSON/LIB_BDD_JSON.csproj" />
+  <Project Path="TEST_APP_QUIZ/TEST_APP_QUIZ.csproj" />
+</Solution>

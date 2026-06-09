@@ -1,0 +1,305 @@
+﻿<UserControl x:Class="APP_WPF.CTRL_CONFIG"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:APP_WPF"
+             mc:Ignorable="d" 
+            Background="#0F0F1A">
+
+    <UserControl.Resources>
+
+        <!-- COULEURS -->
+        <SolidColorBrush x:Key="BgCard"        Color="#1A1A2E"/>
+        <SolidColorBrush x:Key="BgPanel"       Color="#16213E"/>
+        <SolidColorBrush x:Key="AccentPurple"  Color="#7C3AED"/>
+        <SolidColorBrush x:Key="AccentViolet"  Color="#A855F7"/>
+        <SolidColorBrush x:Key="AccentCyan"    Color="#06B6D4"/>
+        <SolidColorBrush x:Key="TextPrimary"   Color="#F1F5F9"/>
+        <SolidColorBrush x:Key="TextMuted"     Color="#94A3B8"/>
+        <SolidColorBrush x:Key="TextDim"       Color="#475569"/>
+
+        <LinearGradientBrush x:Key="GradPurple" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#7C3AED" Offset="0"/>
+            <GradientStop Color="#A855F7" Offset="1"/>
+        </LinearGradientBrush>
+
+        <!-- BOUTON PRINCIPAL -->
+        <Style x:Key="BtnPrimary" TargetType="Button">
+            <Setter Property="Background"      Value="{StaticResource GradPurple}"/>
+            <Setter Property="Foreground"      Value="{StaticResource TextPrimary}"/>
+            <Setter Property="FontFamily"      Value="Segoe UI Semibold"/>
+            <Setter Property="FontSize"        Value="14"/>
+            <Setter Property="Padding"         Value="36,13"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor"          Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="10"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.85"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Opacity" Value="0.7"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.4"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- BOUTON RETOUR -->
+        <Style x:Key="BtnRetour" TargetType="Button">
+            <Setter Property="Background"      Value="Transparent"/>
+            <Setter Property="Foreground"      Value="{StaticResource TextMuted}"/>
+            <Setter Property="FontFamily"      Value="Segoe UI"/>
+            <Setter Property="FontSize"        Value="13"/>
+            <Setter Property="Padding"         Value="14,8"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor"          Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="8"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
+                                <Setter Property="Background" Value="#1A1A2E"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- COMBOBOX -->
+        <Style x:Key="ComboModerne" TargetType="ComboBox">
+            <Setter Property="Background"      Value="#16213E"/>
+            <Setter Property="Foreground"      Value="#16213E"/>
+            <Setter Property="BorderBrush"     Value="#2D2D4E"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="Padding"         Value="12,8"/>
+            <Setter Property="FontFamily"      Value="Segoe UI"/>
+            <Setter Property="FontSize"        Value="13"/>
+            <Setter Property="Height"          Value="44"/>
+        </Style>
+
+        <!-- RADIO DIFFICULTÉ -->
+        <Style x:Key="RadioDifficulte" TargetType="RadioButton">
+            <Setter Property="Foreground"  Value="{StaticResource TextMuted}"/>
+            <Setter Property="FontFamily"  Value="Segoe UI"/>
+            <Setter Property="FontSize"    Value="13"/>
+            <Setter Property="Cursor"      Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Border Background="#16213E"
+                                BorderBrush="#2D2D4E"
+                                BorderThickness="1.5"
+                                CornerRadius="8"
+                                Padding="16,10">
+                            <StackPanel Orientation="Horizontal">
+                                <Ellipse Width="12" Height="12"
+                                         StrokeThickness="2"
+                                         Stroke="#4B4B6B"
+                                         Margin="0,0,10,0">
+                                    <Ellipse.Style>
+                                        <Style TargetType="Ellipse">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource AncestorType=RadioButton}}" Value="True">
+                                                    <Setter Property="Fill"   Value="{StaticResource AccentPurple}"/>
+                                                    <Setter Property="Stroke" Value="{StaticResource AccentViolet}"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Ellipse.Style>
+                                </Ellipse>
+                                <ContentPresenter VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </UserControl.Resources>
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Halos déco -->
+        <Canvas IsHitTestVisible="False">
+            <Ellipse Canvas.Left="-60" Canvas.Top="-60"
+                     Width="320" Height="320" Opacity="0.08">
+                <Ellipse.Fill>
+                    <RadialGradientBrush>
+                        <GradientStop Color="#7C3AED" Offset="0"/>
+                        <GradientStop Color="Transparent" Offset="1"/>
+                    </RadialGradientBrush>
+                </Ellipse.Fill>
+            </Ellipse>
+        </Canvas>
+
+
+        <!-- En-tête -->
+        <Grid Grid.Row="0" Margin="32,24,32,0">
+            <Button Tag="BTN_RETOUR_ACCUEIL"
+                    x:Name="Btn_Retour"
+                    Click="Btn_Retour_Click"
+                    Content="← Retour"
+                    Style="{StaticResource BtnRetour}"
+                    HorizontalAlignment="Left"/>
+            <StackPanel HorizontalAlignment="Center">
+                <TextBlock Text="Configuration"
+                           FontFamily="Segoe UI Black" FontSize="26"
+                           FontWeight="Black"
+                           Foreground="{StaticResource TextPrimary}"
+                           HorizontalAlignment="Center"/>
+                <TextBlock Text="Personnalise ta partie"
+                           FontFamily="Segoe UI" FontSize="13"
+                           Foreground="{StaticResource TextMuted}"
+                           HorizontalAlignment="Center"
+                           Margin="0,4,0,0"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Carte principale -->
+        <Border Grid.Row="1"
+                Background="{StaticResource BgCard}"
+                CornerRadius="20"
+                Margin="60,24,60,0"
+                Padding="40,32">
+            <Border.Effect>
+                <DropShadowEffect Color="#000000" Opacity="0.4"
+                                  BlurRadius="30" ShadowDepth="4"/>
+            </Border.Effect>
+
+            <StackPanel>
+
+                <!-- CATÉGORIE -->
+                <TextBlock Text="📚   CATÉGORIE"
+                           FontFamily="Segoe UI Semibold" FontSize="11"
+                           Foreground="{StaticResource TextMuted}"
+                           Margin="0,0,0,8"/>
+                <ComboBox Tag="CBO_CATEGORIE"
+                          x:Name="Cmb_Categories"
+                          Style="{StaticResource ComboModerne}"
+                          Margin="0,0,0,28">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <ComboBoxItem Content="{Binding Key}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+                <!-- Séparateur -->
+                <Rectangle Height="1" Fill="#2D2D4E" Margin="0,0,0,28"/>
+
+                <!-- DIFFICULTÉ -->
+                <TextBlock Text="⚡   DIFFICULTÉ"
+                           FontFamily="Segoe UI Semibold" FontSize="11"
+                           Foreground="{StaticResource TextMuted}"
+                           Margin="0,0,0,10"/>
+                <UniformGrid Columns="3" Margin="0,0,0,28"
+                             Tag="PANEL_DIFFICULTE">
+                    <RadioButton Tag="easy"   Content="😌  Facile"
+                                 Style="{StaticResource RadioDifficulte}"
+                                 IsChecked="True"
+                                 Margin="0,0,8,0"
+                                 x:Name="Btn_Facile"/>
+                    <RadioButton Tag="medium" Content="😤  Moyen"
+                                 Style="{StaticResource RadioDifficulte}"
+                                 Margin="0,0,8,0"
+                                 x:Name="Btn_Moyen"/>
+                    <RadioButton Tag="hard"   Content="💀  Difficile"
+                                 Style="{StaticResource RadioDifficulte}"
+                                 x:Name="Btn_Difficile"/>
+                </UniformGrid>
+
+                <!-- Séparateur -->
+                <Rectangle Height="1" Fill="#2D2D4E" Margin="0,0,0,28"/>
+
+                <!-- NOMBRE DE QUESTIONS -->
+                <Grid Margin="0,0,0,10">
+                    <TextBlock Text="🎲   NOMBRE DE QUESTIONS"
+                               FontFamily="Segoe UI Semibold" FontSize="11"
+                               Foreground="{StaticResource TextMuted}"
+                               VerticalAlignment="Center"/>
+                    <Border HorizontalAlignment="Right"
+                            CornerRadius="8" Padding="12,5">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#7C3AED" Offset="0"/>
+                                <GradientStop Color="#A855F7" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <TextBlock Tag="LBL_NB_QUESTIONS"
+                                   x:Name="TB_nb_questions"
+                                   Text="10"
+                                   FontFamily="Segoe UI Black" FontSize="16"
+                                   Foreground="{StaticResource TextPrimary}"/>
+                    </Border>
+                </Grid>
+                <Slider Tag="SLD_QUESTIONS"
+                        x:Name="Slider_Questions"
+                        
+                        Minimum="5" Maximum="30"
+                        Value="10"
+                        TickFrequency="1"
+                        IsSnapToTickEnabled="True"
+                        Height="22" ValueChanged="Slider_Questions_ValueChanged"/>
+                <Grid Margin="0,4,0,0">
+                    <TextBlock Text="5"  FontSize="11"
+                               Foreground="{StaticResource TextDim}"
+                               HorizontalAlignment="Left"/>
+                    <TextBlock Text="30" FontSize="11"
+                               Foreground="{StaticResource TextDim}"
+                               HorizontalAlignment="Right"/>
+                </Grid>
+
+            </StackPanel>
+        </Border>
+
+        <!-- Bouton lancer -->
+        <StackPanel Grid.Row="2"
+                    HorizontalAlignment="Center"
+                    Margin="0,20,0,32">
+            <Button Tag="BTN_LANCER"
+                    Content="  Lancer le Quiz  🚀"
+                    Style="{StaticResource BtnPrimary}"
+                    FontSize="16"
+                    Padding="56,15"
+                    x:Name="Btn_Lancer_Quiz"
+                    Click="Btn_Lancer_Quiz_Click"/>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

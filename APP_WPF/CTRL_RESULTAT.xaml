@@ -1,0 +1,289 @@
+﻿<UserControl x:Class="APP_WPF.CTRL_RESULTAT"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:APP_WPF"
+             mc:Ignorable="d" 
+             Background="#0F0F1A">
+
+    <UserControl.Resources>
+
+        <!-- COULEURS -->
+        <SolidColorBrush x:Key="BgCard"        Color="#1A1A2E"/>
+        <SolidColorBrush x:Key="AccentPurple"  Color="#7C3AED"/>
+        <SolidColorBrush x:Key="AccentViolet"  Color="#A855F7"/>
+        <SolidColorBrush x:Key="AccentCyan"    Color="#06B6D4"/>
+        <SolidColorBrush x:Key="AccentGreen"   Color="#10B981"/>
+        <SolidColorBrush x:Key="AccentRed"     Color="#EF4444"/>
+        <SolidColorBrush x:Key="TextPrimary"   Color="#F1F5F9"/>
+        <SolidColorBrush x:Key="TextMuted"     Color="#94A3B8"/>
+        <SolidColorBrush x:Key="TextDim"       Color="#475569"/>
+
+        <LinearGradientBrush x:Key="GradPurple" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#7C3AED" Offset="0"/>
+            <GradientStop Color="#A855F7" Offset="1"/>
+        </LinearGradientBrush>
+
+        <!-- BOUTON PRINCIPAL -->
+        <Style x:Key="BtnPrimary" TargetType="Button">
+            <Setter Property="Background"      Value="{StaticResource GradPurple}"/>
+            <Setter Property="Foreground"      Value="{StaticResource TextPrimary}"/>
+            <Setter Property="FontFamily"      Value="Segoe UI Semibold"/>
+            <Setter Property="FontSize"        Value="14"/>
+            <Setter Property="Padding"         Value="30,13"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor"          Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="10"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.85"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Opacity" Value="0.7"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- BOUTON SECONDAIRE (contour) -->
+        <Style x:Key="BtnSecondary" TargetType="Button">
+            <Setter Property="Background"      Value="Transparent"/>
+            <Setter Property="Foreground"      Value="{StaticResource AccentViolet}"/>
+            <Setter Property="FontFamily"      Value="Segoe UI Semibold"/>
+            <Setter Property="FontSize"        Value="14"/>
+            <Setter Property="Padding"         Value="30,13"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="BorderBrush"     Value="{StaticResource AccentPurple}"/>
+            <Setter Property="Cursor"          Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="10"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#1E1B4B"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Opacity" Value="0.7"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </UserControl.Resources>
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Halos déco -->
+        <Canvas IsHitTestVisible="False">
+            <Ellipse Canvas.Left="500" Canvas.Top="300"
+                     Width="400" Height="400" Opacity="0.08">
+                <Ellipse.Fill>
+                    <RadialGradientBrush>
+                        <GradientStop Color="#06B6D4" Offset="0"/>
+                        <GradientStop Color="Transparent" Offset="1"/>
+                    </RadialGradientBrush>
+                </Ellipse.Fill>
+            </Ellipse>
+        </Canvas>
+
+        <!-- Contenu centré -->
+        <StackPanel Grid.Row="0"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    MaxWidth="520">
+
+            <!-- Emoji trophée -->
+            <TextBlock Tag="LBL_EMOJI_RESULTAT"
+                       Text="🏆"
+                       FontSize="68"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,10"/>
+
+            <!-- Titre résultat -->
+            <TextBlock Tag="LBL_TITRE_RESULTAT"
+                       x:Name="tbx_Titre_result"
+                       Text="EXCELLENT !"
+                       FontFamily="Segoe UI Black"
+                       FontSize="30"
+                       FontWeight="Black"
+                       Foreground="{StaticResource TextPrimary}"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,6"/>
+
+            <!-- Sous-titre encouragement -->
+            <TextBlock Tag="LBL_MESSAGE_RESULTAT"
+                       x:Name="tbx_mess_result"
+                       Text="Tu maîtrises le sujet ! Continue comme ça 💪"
+                       FontFamily="Segoe UI" FontSize="14"
+                       Foreground="{StaticResource TextMuted}"
+                       HorizontalAlignment="Center"
+                       TextWrapping="Wrap"
+                       TextAlignment="Center"
+                       Margin="0,0,0,28"/>
+
+            <!-- Carte de stats -->
+            <Border Background="{StaticResource BgCard}"
+                    CornerRadius="18"
+                    Padding="36,28">
+                <Border.Effect>
+                    <DropShadowEffect Color="#000000" Opacity="0.4"
+                                      BlurRadius="28" ShadowDepth="3"/>
+                </Border.Effect>
+
+                <StackPanel>
+
+                    <!-- 3 chiffres clés -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="1"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="1"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Bonnes réponses -->
+                        <StackPanel Grid.Column="0" HorizontalAlignment="Center">
+                            <TextBlock Tag="LBL_NB_BONNES"
+                                       x:Name="tbx_nb_bnrep"
+                                       Text="8"
+                                       FontFamily="Segoe UI Black" FontSize="42"
+                                       Foreground="{StaticResource AccentGreen}"
+                                       HorizontalAlignment="Center"/>
+                            <TextBlock Text="Correctes"
+                                       FontFamily="Segoe UI" FontSize="12"
+                                       Foreground="{StaticResource TextMuted}"
+                                       HorizontalAlignment="Center"/>
+                        </StackPanel>
+
+                        <!-- Séparateur vertical -->
+                        <Rectangle Grid.Column="1" Fill="#2D2D4E" Width="1"/>
+
+                        <!-- Pourcentage -->
+                        <StackPanel Grid.Column="2" HorizontalAlignment="Center">
+                            <TextBlock Tag="LBL_POURCENTAGE"
+                                       x:Name="tbx_pourcentage"
+                                       Text="80%"
+                                       FontFamily="Segoe UI Black" FontSize="42"
+                                       HorizontalAlignment="Center">
+                                <TextBlock.Foreground>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                        <GradientStop Color="#A855F7" Offset="0"/>
+                                        <GradientStop Color="#06B6D4" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </TextBlock.Foreground>
+                            </TextBlock>
+                            <TextBlock Text="Score"
+                                       FontFamily="Segoe UI" FontSize="12"
+                                       Foreground="{StaticResource TextMuted}"
+                                       HorizontalAlignment="Center"/>
+                        </StackPanel>
+
+                        <!-- Séparateur vertical -->
+                        <Rectangle Grid.Column="3" Fill="#2D2D4E" Width="1"/>
+
+                        <!-- Mauvaises réponses -->
+                        <StackPanel Grid.Column="4" HorizontalAlignment="Center">
+                            <TextBlock Tag="LBL_NB_MAUVAISES"
+                                       x:Name="tb_nb_fsrep"
+                                       Text="2"
+                                       FontFamily="Segoe UI Black" FontSize="42"
+                                       Foreground="{StaticResource AccentRed}"
+                                       HorizontalAlignment="Center"/>
+                            <TextBlock Text="Incorrectes"
+                                       FontFamily="Segoe UI" FontSize="12"
+                                       Foreground="{StaticResource TextMuted}"
+                                       HorizontalAlignment="Center"/>
+                        </StackPanel>
+
+                    </Grid>
+
+                    <!-- Séparateur horizontal -->
+                    <Rectangle Height="1" Fill="#2D2D4E" Margin="0,22,0,22"/>
+
+                    <!-- Barre de score visuelle -->
+                    <Grid Margin="0,0,0,6">
+                        <TextBlock Text="Progression"
+                                   FontFamily="Segoe UI Semibold" FontSize="11"
+                                   Foreground="{StaticResource TextDim}"
+                                   HorizontalAlignment="Left"/>
+                        <TextBlock Tag="LBL_SCORE_BARRE"
+                                   x:Name="tbx_score_petit"
+                                   Text="8 / 10"
+                                   FontFamily="Segoe UI Semibold" FontSize="11"
+                                   Foreground="{StaticResource TextMuted}"
+                                   HorizontalAlignment="Right"/>
+                    </Grid>
+                    <Border Background="#2D2D4E"
+                            CornerRadius="4" Height="10">
+                        <Border Tag="BARRE_SCORE_RESULTAT"
+                                x:Name="brd_progress_bar_petit"
+                                CornerRadius="4"
+                                Width="0"
+                                HorizontalAlignment="Left">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                    <GradientStop Color="Green" Offset="0"/>
+                                    <GradientStop Color="Green" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                        </Border>
+                    </Border>
+
+                </StackPanel>
+            </Border>
+        </StackPanel>
+
+        <!-- Boutons bas -->
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Margin="0,0,0,36">
+            <Button Tag="BTN_REJOUER"
+                    Content="🔄  Rejouer"
+                    Style="{StaticResource BtnPrimary}"
+                    Margin="0,0,12,0"
+                    x:Name="btn_rejouer"
+                    Click="btn_rejouer_Click"/>
+            <Button Tag="BTN_ACCUEIL"
+                    Content="🏠  Accueil"
+                    Style="{StaticResource BtnSecondary}"
+                    Margin="0,0,12,0"
+                    x:Name="btn_acceuil"
+                    Click="btn_acceuil_Click"/>
+            <Button Tag="BTN_RESULTAT"
+                    Content=" 📖 DETAIL"
+                    Style="{StaticResource BtnSecondary}"
+                    x:Name="btn_detail"
+                    Click="btn_detail_Click">
+            </Button>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

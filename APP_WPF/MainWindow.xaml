@@ -1,0 +1,258 @@
+﻿<Window x:Class="APP_WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:APP_WPF"
+        mc:Ignorable="d"
+        Title="QuizMaster" Height="650" Width="900"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanMinimize"
+        Background="#0F0F1A">
+
+    <Window.Resources>
+
+        <!-- COULEURS -->
+        <SolidColorBrush x:Key="BgDeep"       Color="#0F0F1A"/>
+        <SolidColorBrush x:Key="BgCard"        Color="#1A1A2E"/>
+        <SolidColorBrush x:Key="AccentPurple"  Color="#7C3AED"/>
+        <SolidColorBrush x:Key="AccentViolet"  Color="#A855F7"/>
+        <SolidColorBrush x:Key="AccentCyan"    Color="#06B6D4"/>
+        <SolidColorBrush x:Key="TextPrimary"   Color="#F1F5F9"/>
+        <SolidColorBrush x:Key="TextMuted"     Color="#94A3B8"/>
+        <SolidColorBrush x:Key="TextDim"       Color="#475569"/>
+
+        <LinearGradientBrush x:Key="GradPurple" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#7C3AED" Offset="0"/>
+            <GradientStop Color="#A855F7" Offset="1"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="GradTitle" StartPoint="0,0" EndPoint="1,0">
+            <GradientStop Color="#A855F7" Offset="0"/>
+            <GradientStop Color="#06B6D4" Offset="1"/>
+        </LinearGradientBrush>
+
+        <!-- BOUTON PRINCIPAL -->
+        <Style x:Key="BtnPrimary" TargetType="Button">
+            <Setter Property="Background"      Value="{StaticResource GradPurple}"/>
+            <Setter Property="Foreground"      Value="{StaticResource TextPrimary}"/>
+            <Setter Property="FontFamily"      Value="Segoe UI Semibold"/>
+            <Setter Property="FontSize"        Value="15"/>
+            <Setter Property="Padding"         Value="40,14"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor"          Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="12"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.85"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Opacity" Value="0.7"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- BOUTON GHOST -->
+        <Style x:Key="BtnGhost" TargetType="Button">
+            <Setter Property="Background"      Value="Transparent"/>
+            <Setter Property="Foreground"      Value="{StaticResource TextMuted}"/>
+            <Setter Property="FontFamily"      Value="Segoe UI"/>
+            <Setter Property="FontSize"        Value="13"/>
+            <Setter Property="Padding"         Value="24,10"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush"     Value="#2D2D4E"/>
+            <Setter Property="Cursor"          Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="10"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background"  Value="#1A1A2E"/>
+                                <Setter Property="Foreground"  Value="{StaticResource TextPrimary}"/>
+                                <Setter Property="BorderBrush" Value="{StaticResource AccentPurple}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Window.Resources>
+
+    <Grid Background="{StaticResource BgDeep}">
+
+        <!-- Contenu centré -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Déco : halos en arrière-plan -->
+        <Canvas Grid.Row="0" Grid.RowSpan="2" IsHitTestVisible="False">
+            <!-- Halo violet haut-gauche -->
+            <Ellipse Canvas.Left="-120" Canvas.Top="-120"
+                     Width="500" Height="500" Opacity="0.12">
+                <Ellipse.Fill>
+                    <RadialGradientBrush>
+                        <GradientStop Color="#7C3AED" Offset="0"/>
+                        <GradientStop Color="Transparent" Offset="1"/>
+                    </RadialGradientBrush>
+                </Ellipse.Fill>
+            </Ellipse>
+            <!-- Halo cyan bas-droite -->
+            <Ellipse Canvas.Left="600" Canvas.Top="350"
+                     Width="450" Height="450" Opacity="0.09">
+                <Ellipse.Fill>
+                    <RadialGradientBrush>
+                        <GradientStop Color="#06B6D4" Offset="0"/>
+                        <GradientStop Color="Transparent" Offset="1"/>
+                    </RadialGradientBrush>
+                </Ellipse.Fill>
+            </Ellipse>
+            <!-- Petits points décoratifs -->
+            <Ellipse Canvas.Left="160" Canvas.Top="120"
+                     Width="4" Height="4" Fill="#7C3AED" Opacity="0.6"/>
+            <Ellipse Canvas.Left="740" Canvas.Top="200"
+                     Width="6" Height="6" Fill="#06B6D4" Opacity="0.5"/>
+            <Ellipse Canvas.Left="80"  Canvas.Top="400"
+                     Width="5" Height="5" Fill="#A855F7" Opacity="0.4"/>
+            <Ellipse Canvas.Left="820" Canvas.Top="480"
+                     Width="4" Height="4" Fill="#06B6D4" Opacity="0.5"/>
+            <Ellipse Canvas.Left="500" Canvas.Top="80"
+                     Width="3" Height="3" Fill="#F59E0B" Opacity="0.4"/>
+        </Canvas>
+
+        <StackPanel Grid.Row="0"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+
+            <!-- Icône / logo -->
+            <Border Width="96" Height="96"
+                    CornerRadius="28"
+                    HorizontalAlignment="Center"
+                    Margin="0,0,0,28">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#4C1D95" Offset="0"/>
+                        <GradientStop Color="#7C3AED" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Border.Effect>
+                    <DropShadowEffect Color="#7C3AED" Opacity="0.6"
+                                      BlurRadius="28" ShadowDepth="0"/>
+                </Border.Effect>
+                <TextBlock Text="🎯"
+                           FontSize="46"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+            </Border>
+
+            <!-- Titre principal avec gradient -->
+            <TextBlock Text="QuizMaster"
+                       FontFamily="Segoe UI Black"
+                       FontSize="52"
+                       FontWeight="Black"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,10">
+                <TextBlock.Foreground>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#A855F7" Offset="0"/>
+                        <GradientStop Color="#06B6D4" Offset="1"/>
+                    </LinearGradientBrush>
+                </TextBlock.Foreground>
+            </TextBlock>
+
+            <!-- Sous-titre -->
+            <TextBlock Text="Teste tes connaissances sur tous les sujets"
+                       FontFamily="Segoe UI"
+                       FontSize="15"
+                       Foreground="{StaticResource TextMuted}"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,48"/>
+
+            <!-- Chips de catégories (déco) -->
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Margin="0,0,0,48">
+                <Border Background="#1A1A2E" CornerRadius="20"
+                        Padding="14,6" Margin="0,0,8,0"
+                        BorderBrush="#2D2D4E" BorderThickness="1">
+                    <TextBlock Text="🎮 Jeux vidéos"
+                               FontFamily="Segoe UI" FontSize="12"
+                               Foreground="{StaticResource AccentViolet}"/>
+                </Border>
+                <Border Background="#1A1A2E" CornerRadius="20"
+                        Padding="14,6" Margin="0,0,8,0"
+                        BorderBrush="#2D2D4E" BorderThickness="1">
+                    <TextBlock Text="🌍 Géographie"
+                               FontFamily="Segoe UI" FontSize="12"
+                               Foreground="{StaticResource AccentCyan}"/>
+                </Border>
+                <Border Background="#1A1A2E" CornerRadius="20"
+                        Padding="14,6" Margin="0,0,8,0"
+                        BorderBrush="#2D2D4E" BorderThickness="1">
+                    <TextBlock Text="🎬 Films"
+                               FontFamily="Segoe UI" FontSize="12"
+                               Foreground="#F59E0B"/>
+                </Border>
+                <Border Background="#1A1A2E" CornerRadius="20"
+                        Padding="14,6"
+                        BorderBrush="#2D2D4E" BorderThickness="1">
+                    <TextBlock Text="🔬 Sciences"
+                               FontFamily="Segoe UI" FontSize="12"
+                               Foreground="#10B981"/>
+                </Border>
+            </StackPanel>
+
+            <!-- Boutons d'action -->
+            <StackPanel HorizontalAlignment="Center">
+                <Button Tag="BTN_JOUER "
+                        x:Name="Btn_Jouer"
+                        Click="Btn_Jouer_Click"
+                        Content="  Jouer maintenant  🚀"
+                        Style="{StaticResource BtnPrimary}"
+                        FontSize="16"
+                        Padding="60,16"
+                        Margin="0,0,0,12"/>
+                <Button Tag="BTN_QUITTER"
+                        x:Name="btn_quitter"
+                        Click="btn_quitter_Click"
+                        Content="Quitter"
+                        Style="{StaticResource BtnGhost}"/>
+            </StackPanel>
+
+        </StackPanel>
+
+        <!-- Pied de page version -->
+        <TextBlock Grid.Row="1"
+                   Text="v1.0  —  Powered by Open Trivia DB"
+                   FontFamily="Segoe UI" FontSize="11"
+                   Foreground="{StaticResource TextDim}"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,16"/>
+
+
+        <ContentControl x:Name="Zone_Application">
+            
+        </ContentControl>
+
+    </Grid>
+</Window>
